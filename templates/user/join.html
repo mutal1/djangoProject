@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.rtl.min.css" integrity="sha384-7mQhpDl5nRA5nY9lr8F1st2NbIly/8WqhjTp+0oFxEA/QUuvlbF6M1KXezGBh3Nb" crossorigin="anonymous">
+
+    <title>로그인</title>
+      <!-- jquery -->
+    <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+  </head>
+  <body>
+
+  <div style="display: flex; justify-content: center; text-align: center; margin-top: 20px">
+      <div style="border: solid 1px gray; width:340px; height: 550px;">
+          <div style="text-align: center; margin-top: 20px" >
+              <img style="width: 200px" src="https://aspire.io/wp-content/themes/aspireiq/assets/img/icons/png/instagram.png" >
+          </div>
+          <div style="margin-top: 20px">친구들의 사진과 동영상을 보려면 가입하세요</div>
+          <div class="form-floating mb-3" style="margin-top: 20px">
+              <input type="email" class="form-control" id="email_input" placeholder="name@example.com">
+              <label for="email_input">이메일 주소 입력</label>
+          </div>
+          <div class="form-floating" style="margin-top: 20px">
+              <input type="password" class="form-control" id="password_input" placeholder="Password">
+              <label for="password_input">패스워드 입력</label>
+          </div>
+          <div class="form-floating mb-3" style="margin-top: 20px">
+              <input type="email" class="form-control" id="name_input" placeholder="name@example.com">
+              <label for="name_input">이름 입력</label>
+          </div>
+          <div class="form-floating mb-3" style="margin-top: 20px">
+              <input type="email" class="form-control" id="nickname_input" placeholder="name@example.com">
+              <label for="nickname_input">닉네임 입력</label>
+          </div>
+          <button id="join_button" style="margin-top: 30px">가입 버튼</button>
+      </div>
+</div>
+  <div style="display: flex; justify-content: center;margin-top: 30px">
+  <div style="padding: 20px; text-align: center;border: solid 1px rgba(219,219,219,1);width: 340px;height: 70px;">
+      <div>계정이 있으신가요? <a href="/user/login">로그인</a></div>
+  </div>
+</div>
+
+  <script>
+    $('#join_button').click(function () {
+
+        let email = $('#email_input').val();
+        let password = $('#password_input').val();
+        let nickname = $('#nickname_input').val();
+        let name = $('#name_input').val();
+
+        console.log(email, password, nickname, name);
+
+        $.ajax({
+            url: "/user/join",
+            data: {
+                email : email,
+                password : password,
+                nickname : nickname,
+                name : name
+            },
+            method:"POST",
+
+            success: function(data){
+                console.log("성공");
+                alert("회원가입 성공! 로그인 해주세요")
+                location.replace("/user/login")
+            },
+            error: function (request, status, error){
+                console.log("에러");
+            },
+            complete: function (){
+                console.log("완료");
+
+            }
+        });
+    });
+  </script>
+
+  <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>
